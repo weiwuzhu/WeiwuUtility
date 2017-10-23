@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2005
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "WeiwuUtility", "WeiwuUtility\WeiwuUtility.pyproj", "{61D525E5-7BFC-4924-9C3F-8FD6A7F9F88B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{61D525E5-7BFC-4924-9C3F-8FD6A7F9F88B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61D525E5-7BFC-4924-9C3F-8FD6A7F9F88B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7199F905-61CC-4106-ACF4-4DD8133F2792}
+	EndGlobalSection
+EndGlobal
