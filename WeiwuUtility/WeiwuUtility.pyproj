@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>61d525e5-7bfc-4924-9c3f-8fd6a7f9f88b</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>NoEmptyPercentage.py</StartupFile>
+    <StartupFile>MeasureYelpUrlSegment.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -21,8 +21,15 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="MatchMetastreamKeyWord.py" />
+    <Compile Include="MeasureYelpUrlSegment.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="NoEmptyPercentage.py" />
     <Compile Include="StringFormatter.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Test.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
