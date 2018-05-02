@@ -27,7 +27,7 @@ def clean_str(string):
     return string.strip().lower()
 
 
-def load_data_and_labels(training_data_file, hasHeader=True):
+def load_data_and_labels(training_data_file, class_index_file, isEval=False, hasHeader=True):
     inputFile = open(training_data_file, 'r', encoding='utf-8')
 
     schema = {}
@@ -56,10 +56,18 @@ def load_data_and_labels(training_data_file, hasHeader=True):
 
     categories = sorted(list(categories))
     classes = {}
-    index = 0
-    for c in categories:
-        classes[c] = index
-        index += 1
+    if not isEval:
+        classIndexFile = open(class_index_file, 'w', encoding='utf-8')
+        index = 0
+        for c in categories:
+            classes[c] = index
+            classIndexFile.write(c + '\t' + str(index) + '\n')
+            index += 1
+    else:
+        classIndexFile = open(class_index_file, 'r', encoding='utf-8')
+        for line in classIndexFile:
+            fields = line[:-1].split('\t')
+            classes[fields[0]] = int(fields[1])
 
     y = []
     for l in labels:
@@ -90,6 +98,24 @@ def batch_iter(data, batch_size, num_epochs, shuffle=True):
             end_index = min((batch_num + 1) * batch_size, data_size)
             yield shuffled_data[start_index:end_index]
 
+
+def label2string(labels, class_index_file):
+    class_index = {}
+    for line in list(open(class_index_file, "r").readlines()):
+        fields = line[:-1].split('\t')
+        class_index[int(fields[1])] = fields[0]
+    
+    result = []
+    for label in labels:
+        predictClass = []
+        index = 0
+        for i in label:
+            if i == 1:
+                predictClass.append(class_index[index])
+            index += 1
+        result.append(';'.join(predictClass))
+    return result
+
 if __name__ == '__main__':
-    [x, y] = load_data_and_labels("D:\Code\WeiwuUtility\EntityCategorization\data\YelpClick\YelpClickTrainingData.tsv")
-    print(y)
+    [x, y] = load_data_and_labels("D:\Code\WeiwuUtility\EntityCategorization\data\YelpClick\YelpClickTrainingData.tsv", "D:\Code\WeiwuUtility\EntityCategorization\data\YelpClick\YelpClickCategoryIndex.tsv")
+    print(y[0])
