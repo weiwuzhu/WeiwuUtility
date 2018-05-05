@@ -17,9 +17,10 @@ tf.flags.DEFINE_float("test_sample_percentage", .2, "Percentage of the training 
 tf.flags.DEFINE_float("dev_sample_percentage", .1, "Percentage of the training data to use for validation")
 tf.flags.DEFINE_string("training_data_file", "./data/YelpClick/YelpClickTrainingData.tsv", "Data source for the training data.")
 tf.flags.DEFINE_string("class_index_file", "./data/YelpClick/YelpClickCategoryIndex.tsv", "Output file for the class index.")
+tf.flags.DEFINE_string("pretrained_word_embedding_file", "./data/WordVector/GoogleNews-vectors-negative300.bin", "Pretrained word embedding file.")
 
 # Model Hyperparameters
-tf.flags.DEFINE_integer("embedding_dim", 128, "Dimensionality of character embedding (default: 128)")
+tf.flags.DEFINE_integer("embedding_dim", 300, "Dimensionality of character embedding (default: 128)")
 tf.flags.DEFINE_string("filter_sizes", "1,2,3,4,5", "Comma-separated filter sizes (default: '1,2,3,4,5')")
 tf.flags.DEFINE_integer("num_filters", 128, "Number of filters per filter size (default: 128)")
 tf.flags.DEFINE_float("dropout_keep_prob", 0.5, "Dropout keep probability (default: 0.5)")
@@ -50,10 +51,14 @@ print("")
 print("Loading data...")
 x_text, y = data_helpers.load_data_and_labels(FLAGS.training_data_file, FLAGS.class_index_file)
 
+# Get pre-trained work embedding
+word2id = data_helpers.convert_word_to_id(x_text)
+embedding, word2id = data_helpers.prepare_pretrained_embedding(FLAGS.pretrained_word_embedding_file, word2id)
+
 # Build vocabulary
 max_document_length = max([len(x.split(" ")) for x in x_text])
-vocab_processor = learn.preprocessing.VocabularyProcessor(max_document_length)
-x = np.array(list(vocab_processor.fit_transform(x_text)))
+vocab_processor = learn.preprocessing.VocabularyProcessor(max_document_length, vocabulary=word2id)
+x = np.array(list(vocab_processor.transform(x_text)))
 
 # Split train/test set
 test_sample_index = -1 * int(FLAGS.test_sample_percentage * float(len(y)))
@@ -94,6 +99,8 @@ with tf.Graph().as_default():
             filter_sizes=list(map(int, FLAGS.filter_sizes.split(","))),
             num_filters=FLAGS.num_filters,
             l2_reg_lambda=FLAGS.l2_reg_lambda)
+
+        cnn.assign_word_embedding(sess, embedding)
 
         # Define Training procedure
         global_step = tf.Variable(0, name="global_step", trainable=False)

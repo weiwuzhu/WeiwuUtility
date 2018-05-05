@@ -82,3 +82,6 @@ class TextCNN(object):
         with tf.name_scope("accuracy"):
             correct_predictions = tf.equal(self.predictions, self.input_y)
             self.accuracy = tf.reduce_mean(tf.cast(correct_predictions, "float"), name="accuracy")
+
+    def assign_word_embedding(self, session, word_embedding):
+        session.run(tf.assign(self.W, word_embedding))
