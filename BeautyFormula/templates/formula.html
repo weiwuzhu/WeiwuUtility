@@ -1,0 +1,54 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block styles %}
+{{ super() }}
+	<style>
+		body { background: #e8f1f9; }
+	</style>
+{% endblock %}
+
+
+{% block title %}
+AI Generated Formula
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+
+      <!-- note, the id is not used in the template -->
+      <p><a href="{{ url_for('type') }}"><-回到配方效果输入页面</a></p>
+	  
+	  <h1 class="pt-5 pb-2">您输入的配方总分：{{ effect_sum }}<br>具体效果：</h1>
+	  
+	  <table>
+        {%for key in effect_str%}
+        <tr>
+          <td class="col-md-2">{{ key }}</td>
+          <td class="col-md-2">{{ effect_str[key] }}</td>
+        {% endfor %}
+        </tr>
+      </table>
+
+	  <h1 class="pt-5 pb-2">湖畔AI生成的配方：</h1>
+	  <!--
+	      notice how the URL in the link above is rendered for
+	      Flask - it needs to name the FUNCTION, not the route
+      -->
+
+	  <table>
+        {%for key in formula%}
+        <tr>
+          <td class="col-md-2">{{ key }}</td>
+          <td class="col-md-2">{{ formula[key] }}%</td>
+        {% endfor %}
+        </tr>
+      </table>
+    </div>
+
+</div>
+
+{% endblock %}

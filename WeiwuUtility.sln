@@ -9,6 +9,8 @@ Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "cnn-text-classification-tf"
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "EntityCategorization", "EntityCategorization\EntityCategorization.pyproj", "{0536FD96-D729-4D10-A37A-F687B19E7C9E}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "BeautyFormula", "BeautyFormula\BeautyFormula.pyproj", "{FC209460-DA12-4437-B2A7-A1A2CFE0C22E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,8 @@ Global
 		{FCF17B3B-2F2C-41DC-A296-D785A1B47B86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0536FD96-D729-4D10-A37A-F687B19E7C9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0536FD96-D729-4D10-A37A-F687B19E7C9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC209460-DA12-4437-B2A7-A1A2CFE0C22E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC209460-DA12-4437-B2A7-A1A2CFE0C22E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
